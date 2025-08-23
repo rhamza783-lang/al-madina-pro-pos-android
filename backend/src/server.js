@@ -9,7 +9,7 @@ const { sequelize } = require('./models');
 // Import routes
 const authRoutes = require('./routes/authRoutes');
 const orderRoutes = require('./routes/orderRoutes');
-const paymentRoutes = require('./routes/paymentRoutes');
+const paymentRoutes = require('./routes/paymentRoutes'); // Corrected
 const reportRoutes = require('./routes/reportRoutes');
 // Import middleware
 const { authMiddleware } = require('./middleware/authMiddleware');
@@ -29,7 +29,7 @@ app.use('/api/auth', authRoutes);
 
 // Protected routes that require a valid JWT
 app.use('/api/orders', authMiddleware, orderRoutes);
-app.use('/api/payments', authMiddleware, paymentRoutes);
+app.use('/api/payments', authMiddleware, paymentRoutes); // Corrected
 app.use('/api/reports', authMiddleware, reportRoutes);
 
 // Health check endpoint
