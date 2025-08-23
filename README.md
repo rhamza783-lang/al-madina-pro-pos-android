@@ -119,6 +119,15 @@ A comprehensive, production-ready Point of Sale system for restaurants, featurin
 Deploying to Production
 Backend
 For a production environment, it is recommended to use a process manager like PM2 and a reverse proxy like Nginx.
+# Install PM2 globally
+npm install -g pm2
+
+# Start the server with PM2
+pm2 start src/server.js --name almadina-pos
+
+# Ensure PM2 restarts on server reboot
+pm2 save
+pm2 startup
 Support
 For issues, feature requests, or support, please contact:
 Email: support@almadina********
