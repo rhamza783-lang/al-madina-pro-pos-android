@@ -8,11 +8,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # This is the key. It forces all 'run' commands to execute inside the android-app folder.
-    defaults:
-      run:
-        working-directory: ./android-app
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,20 +19,17 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-      # We are removing the 'setup-gradle' action. We will trust the files
-      # that you have manually uploaded to the repository.
-
       - name: Grant execute permission to gradlew
-        # This now runs inside 'android-app', so the path is simpler.
-        run: chmod +x ./gradlew
+        run: chmod +x android-app/gradlew
 
+      # --- THE FINAL FIX IS IN THIS STEP ---
       - name: Build with Gradle
-        # This also runs inside 'android-app'.
-        run: ./gradlew assembleDebug
+        # This command now first changes the directory (cd) into android-app,
+        # and then runs the build from inside that folder.
+        run: cd android-app && ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: al-madina-pos-debug-apk
-          # The path for the artifact must still be from the repository root.
           path: android-app/app/build/outputs/apk/debug/app-debug.apk
