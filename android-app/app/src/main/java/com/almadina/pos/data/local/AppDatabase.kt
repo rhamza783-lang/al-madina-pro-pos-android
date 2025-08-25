@@ -7,6 +7,7 @@ import com.almadina.pos.model.Category
 import com.almadina.pos.model.Item
 import com.almadina.pos.model.Order
 import com.almadina.pos.model.User
+import com.almadina.pos.model.Payment // IMPORTANT: Add this import
 
 @Database(
     entities = [
@@ -14,6 +15,8 @@ import com.almadina.pos.model.User
         Item::class,
         Category::class,
         User::class
+        // Room does not need a separate table for Payment
+        // because it's stored as JSON within the Order table via a TypeConverter.
     ],
     version = 1,
     exportSchema = false
@@ -22,9 +25,6 @@ import com.almadina.pos.model.User
 abstract class AppDatabase : RoomDatabase() {
     
     abstract fun orderDao(): OrderDao
-    // You would add abstract functions for other DAOs here
-    // abstract fun itemDao(): ItemDao
-    // abstract fun userDao(): UserDao
     
     companion object {
         const val DATABASE_NAME = "almadina_pos_database"
