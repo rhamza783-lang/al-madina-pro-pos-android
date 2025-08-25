@@ -1,21 +1,23 @@
-// This top part tells Gradle WHERE to find the plugins
 pluginManagement {
     repositories {
         google()
         mavenCentral()
         gradlePluginPortal()
     }
-}
-
-// This part tells Gradle where to find your app's libraries
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
+    plugins {
+        // Declare Android Application Plugin with version
+        id("com.android.application") version "8.0.2"
     }
 }
 
-// This is your original code
-rootProject.name = "AlMadinaPOS"
+// Include your app module
 include(":app")
+
+// Optional: If you have other modules
+// include(":feature:login")
+// include(":core")
+
+// If using Kotlin, also declare Kotlin plugin
+// plugins {
+//     id("org.jetbrains.kotlin.android") version "1.9.0"
+// }
