@@ -22,17 +22,21 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-        cache: gradle
 
-    # Step 3: It makes a special file executable, which is required on Linux.
+    # --- NEW STEP TO FIX THE ERROR ---
+    # Step 3: Run the Gradle wrapper task to download the missing .jar file
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
+
+    # Step 4: It makes a special file executable, which is required on Linux.
     - name: Grant execute permission to gradlew
       run: chmod +x android-app/gradlew
       
-    # Step 4: This is the main command. It tells Gradle to build the debug APK.
+    # Step 5: This is the main command. It tells Gradle to build the debug APK.
     - name: Build with Gradle
       run: ./android-app/gradlew -p android-app/ assembleDebug
 
-    # Step 5: It takes the finished APK and uploads it so you can download it.
+    # Step 6: It takes the finished APK and uploads it so you can download it.
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
