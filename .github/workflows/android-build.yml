@@ -8,12 +8,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # --- THE KEY FIX ---
-    # This tells all steps in this job to run inside the 'android-app' folder
-    defaults:
-      run:
-        working-directory: ./android-app
-
     steps:
     # Step 1: Checks out the whole repository
     - name: Checkout repository
@@ -26,19 +20,22 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    # Step 3: Sets up Gradle correctly inside the android-app directory
+    # --- THE KEY FIX ---
+    # Step 3: Sets up Gradle by explicitly pointing to the android-app build root
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
+      with:
+        build-root-path: 'android-app' 
 
-    # Step 4: Grant execute permission. Note the path is simpler now.
+    # Step 4: Grant execute permission using the full path
     - name: Grant execute permission to gradlew
-      run: chmod +x ./gradlew
+      run: chmod +x android-app/gradlew
       
-    # Step 5: Build the app. Note the path is simpler now.
+    # Step 5: Build the app using the full path
     - name: Build with Gradle
-      run: ./gradlew assembleDebug
+      run: ./android-app/gradlew -p android-app/ assembleDebug
 
-    # Step 6: Upload the APK. The path is slightly different here.
+    # Step 6: Upload the APK
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
