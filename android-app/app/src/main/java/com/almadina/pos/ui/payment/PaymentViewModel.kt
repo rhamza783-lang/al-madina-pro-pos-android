@@ -3,12 +3,11 @@ package com.almadina.pos.ui.payment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.almadina.pos.model.Order
-import com.almadina.pos.model.Payment
-import com.almadina.pos.model.PaymentMethod
 import com.almadina.pos.repository.OrderRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,9 +23,10 @@ class PaymentViewModel @Inject constructor(
     fun loadOrder(orderId: String) {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
-            // In a real app, this would be a single DB call
-            val order = orderRepository.getAllOrdersStream().replayCache.firstOrNull()
-                ?.flatten()?.find { it.id == orderId }
+            // --- THIS IS THE FIX ---
+            // Use firstOrNull() to get the first emitted list, then find the order
+            val order = orderRepository.getAllOrdersStream().firstOrNull()
+                ?.find { it.id == orderId } // Use 'it' here
             
             _uiState.update { it.copy(isLoading = false, order = order) }
         }
@@ -34,11 +34,7 @@ class PaymentViewModel @Inject constructor(
 
     fun processPayment(receivedAmount: Double, onPaymentComplete: () -> Unit) {
         viewModelScope.launch {
-            _uiState.value.order?.let { order ->
-                // Here you would call a repository function to update the order
-                // and sync with the backend.
-                
-                // For now, we just navigate away.
+            _uiState.value.order?.let {
                 onPaymentComplete()
             }
         }
