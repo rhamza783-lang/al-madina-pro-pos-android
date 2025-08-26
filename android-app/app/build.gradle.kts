@@ -3,7 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
     id("com.google.dagger.hilt.android")
-    id("org.jetbrains.kotlin.plugin.parcelize") // <-- Use the full ID here
+    id("org.jetbrains.kotlin.plugin.parcelize")
 }
 
 android {
@@ -46,7 +46,7 @@ android {
 }
 
 dependencies {
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.10"))
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.9.22"))
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
@@ -70,8 +70,8 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     
-    implementation("com.google.zxing:core:3.5.3")
-    implementation("com.itextpdf:itext7-core:7.2.5")
+    implementation("com.google.code.gson:gson:2.10.1")
+    
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation("com.github.DantSu:ESCPOS-ThermalPrinter-Android:3.3.0")
     
