@@ -9,13 +9,12 @@ import android.os.Parcelable
 
 @Parcelize
 @Entity(tableName = "items")
-@TypeConverters(Converters::class) // <-- THIS LINE IS NEW
+@TypeConverters(Converters::class)
 data class Item(
     @PrimaryKey
     val id: String,
     val name: String,
     val categoryId: String,
-    val categoryName: String,
     val price: Double,
     val isAvailable: Boolean = true,
     val modifierGroups: List<ModifierGroup> = emptyList()
