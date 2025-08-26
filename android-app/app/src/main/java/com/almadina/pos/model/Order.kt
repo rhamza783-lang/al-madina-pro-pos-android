@@ -30,8 +30,7 @@ data class Order(
     val invoiceNumber: String,
     val items: List<OrderItem>,
     val payments: List<Payment> = emptyList(),
-    val createdAt: Long = System.currentTimeMillis(),
-    val syncStatus: SyncStatus = SyncStatus.PENDING
+    val createdAt: Long = System.currentTimeMillis()
 ) : Parcelable
 
 @Parcelize
@@ -43,8 +42,7 @@ data class OrderItem(
     val unitPrice: Double,
     val totalPrice: Double,
     val modifiers: List<ItemModifier> = emptyList(),
-    val notes: String? = null,
-    val status: OrderItemStatus = OrderItemStatus.PENDING
+    val notes: String? = null
 ) : Parcelable
 
 @Parcelize
@@ -65,6 +63,4 @@ data class Payment(
 
 enum class PaymentStatus { PENDING, PARTIAL, PAID, REFUNDED }
 enum class OrderStatus { ACTIVE, COMPLETED, CANCELLED }
-enum class OrderItemStatus { PENDING, SENT_TO_KITCHEN, SERVED }
 enum class PaymentMethod { CASH, JAZZCASH, EASYPAISA, CARD, CREDIT }
-enum class SyncStatus { SYNCED, PENDING, FAILED }
