@@ -2,7 +2,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    kotlin("kapt") // Simplified syntax
+    id("org.jetbrains.kotlin.kapt") // <-- Use the full ID here
     id("com.google.dagger.hilt.android")
     id("kotlin-parcelize")
 }
