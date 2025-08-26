@@ -1,8 +1,9 @@
+// The versions are now managed in settings.gradle.kts, so we just apply the plugins by ID.
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
+    kotlin("kapt") // Simplified syntax
+    id("com.google.dagger.hilt.android")
     id("kotlin-parcelize")
 }
 
@@ -17,9 +18,6 @@ android {
         versionCode = 1
         versionName = "1.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
 
     buildTypes {
@@ -49,8 +47,7 @@ android {
 }
 
 dependencies {
-    // --- THE FINAL FIX IS HERE ---
-    // This forces all dependencies to use the same, consistent version of the Kotlin library.
+    // This BOM is still needed to resolve the duplicate class issue for libraries.
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.10"))
 
     implementation("androidx.core:core-ktx:1.12.0")
@@ -62,37 +59,24 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     
-    // Navigation
     implementation("androidx.navigation:navigation-compose:2.7.7")
     
-    // Hilt
+    // Hilt: Note the change in the plugin id.
     implementation("com.google.dagger:hilt-android:2.48")
-    kapt("com.google.dagger:hilt-compiler:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48") // Correct compiler name
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
     
-    // Room
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
     
-    // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     
-    // QR Code & Barcode
     implementation("com.google.zxing:core:3.5.3")
-    
-    // PDF
     implementation("com.itextpdf:itext7-core:7.2.5")
-    
-    // Charts
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
-    
-    // Bluetooth Printing
     implementation("com.github.DantSu:ESCPOS-ThermalPrinter-Android:3.3.0")
     
-    // Testing
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
 }
