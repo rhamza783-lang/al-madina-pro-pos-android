@@ -9,7 +9,7 @@ pluginManagement {
         id("org.jetbrains.kotlin.android") version "1.8.10" apply false
         id("org.jetbrains.kotlin.kapt") version "1.8.10" apply false
         id("com.google.dagger.hilt.android") version "2.48" apply false
-        id("org.jetbrains.kotlin.plugin.parcelize") version "1.8.10" apply false // <-- FINAL PLUGIN ADDED
+        id("org.jetbrains.kotlin.plugin.parcelize") version "1.8.10" apply false
     }
 }
 
@@ -18,6 +18,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // --- THIS IS THE FINAL FIX ---
+        // Tell Gradle to also look in JitPack for libraries
+        maven { url = uri("https://jitpack.io") } 
     }
 }
 
