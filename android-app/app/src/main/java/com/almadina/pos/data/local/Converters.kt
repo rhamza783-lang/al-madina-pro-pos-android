@@ -44,7 +44,8 @@ class Converters {
 
     @TypeConverter
     fun toPaymentList(value: String): List<Payment>? {
-        val listType = object : TypeToken<List<Payment>?"() {}.type
+        // --- THIS IS THE LINE I FIXED ---
+        val listType = object : TypeToken<List<Payment>?>() {}.type
         return gson.fromJson(value, listType)
     }
     
