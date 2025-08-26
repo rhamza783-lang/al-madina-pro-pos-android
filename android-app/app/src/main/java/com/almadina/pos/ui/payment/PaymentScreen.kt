@@ -13,8 +13,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.almadina.pos.model.PaymentMethod
-import com.almadina.pos.ui.dashboard.formatCurrency
+import com.almadina.pos.util.formatCurrency // <-- IMPORT ADDED
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,7 +51,6 @@ fun PaymentScreen(
             } else if (uiState.order != null) {
                 val order = uiState.order!!
                 
-                // Order Summary
                 Card(modifier = Modifier.fillMaxWidth()) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text("Order Summary", style = MaterialTheme.typography.titleLarge)
@@ -69,7 +67,6 @@ fun PaymentScreen(
                 }
                 Spacer(Modifier.height(24.dp))
 
-                // Payment Input
                 OutlinedTextField(
                     value = cashReceived,
                     onValueChange = { cashReceived = it },
@@ -79,7 +76,6 @@ fun PaymentScreen(
                 )
                 Spacer(Modifier.height(16.dp))
                 
-                // Change Calculation
                 val receivedAmount = cashReceived.toDoubleOrNull() ?: 0.0
                 val change = receivedAmount - order.totalAmount
                 if (change >= 0) {
@@ -92,7 +88,6 @@ fun PaymentScreen(
 
                 Spacer(Modifier.height(24.dp))
                 
-                // Complete Payment Button
                 Button(
                     onClick = {
                         viewModel.processPayment(
