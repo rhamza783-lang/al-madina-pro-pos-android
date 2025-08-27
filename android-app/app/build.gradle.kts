@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.kapt")
+    id("org.jetbrains.kotlin.kapt") // Required for Hilt & Room annotation processing
 }
 
 android {
@@ -39,20 +39,22 @@ android {
         compose = true
     }
 
-    // ✅ Set Compose Compiler version
+    // ✅ Set Compose Compiler version compatible with AGP 8.2.2
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
 }
 
-// ✅ Define where to download dependencies
+// ✅ Define repositories for dependencies
 repositories {
     google()
     mavenCentral()
 }
 
-// ✅ All dependencies (Hilt, Room, Retrofit, Compose, etc.)
+// ✅ All dependencies
 dependencies {
+
+    // Core
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
@@ -67,12 +69,13 @@ dependencies {
     implementation("androidx.room:room-ktx:2.5.0")
     kapt("androidx.room:room-compiler:2.5.0")
 
+    // Gson - For Room TypeConverters
+    implementation("com.google.code.gson:gson:2.10.1")
+    kapt("com.google.code.gson:gson:2.10.1") // 🔑 Critical: allows KAPT to use Gson during annotation processing
+
     // Retrofit - Networking
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-
-    // Gson - JSON Parsing
-    implementation("com.google.code.gson:gson:2.10.1")
 
     // Kotlin Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
