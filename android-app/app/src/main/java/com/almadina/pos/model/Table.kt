@@ -2,11 +2,14 @@ package com.almadina.pos.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.almadina.pos.data.local.Converters
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 
 @Parcelize
 @Entity(tableName = "tables")
+@TypeConverters(Converters::class) // ✅ Add this
 data class Table(
     @PrimaryKey val id: String,
     val number: Int,
