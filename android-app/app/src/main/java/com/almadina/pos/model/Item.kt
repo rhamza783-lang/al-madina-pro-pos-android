@@ -7,6 +7,7 @@ import com.almadina.pos.data.local.Converters
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 
+// Item Entity
 @Parcelize
 @Entity(tableName = "items")
 @TypeConverters(Converters::class)
@@ -20,6 +21,7 @@ data class Item(
     val modifierGroups: List<ModifierGroup> = emptyList()
 ) : Parcelable
 
+// Modifier Group (part of Item)
 @Parcelize
 data class ModifierGroup(
     val id: String,
@@ -27,6 +29,7 @@ data class ModifierGroup(
     val modifiers: List<Modifier>
 ) : Parcelable
 
+// Modifier (leaf node)
 @Parcelize
 data class Modifier(
     val id: String,
@@ -34,8 +37,10 @@ data class Modifier(
     val price: Double = 0.0
 ) : Parcelable
 
+// Category Entity
 @Parcelize
 @Entity(tableName = "categories")
+@TypeConverters(Converters::class)
 data class Category(
     @PrimaryKey
     val id: String,
