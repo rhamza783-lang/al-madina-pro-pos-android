@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.kapt") // Required for Hilt & Room annotation processing
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -34,57 +34,51 @@ android {
         jvmTarget = "1.8"
     }
 
-    // ✅ Enable Jetpack Compose
     buildFeatures {
         compose = true
     }
 
-    // ✅ Set Compose Compiler version compatible with AGP 8.2.2
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
 }
 
-// ✅ Define repositories for dependencies
 repositories {
     google()
     mavenCentral()
 }
 
-// ✅ All dependencies
 dependencies {
-
-    // Core
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
-    // Hilt - Dependency Injection
+    // Hilt
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-compiler:2.44")
 
-    // Room - Database
+    // Room
     implementation("androidx.room:room-runtime:2.5.0")
     implementation("androidx.room:room-ktx:2.5.0")
     kapt("androidx.room:room-compiler:2.5.0")
 
-    // Gson - For Room TypeConverters
-    implementation("com.google.code.gson:gson:2.10.1")
-    kapt("com.google.code.gson:gson:2.10.1") // 🔑 Critical: allows KAPT to use Gson during annotation processing
-
-    // Retrofit - Networking
+    // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
-    // Kotlin Coroutines
+    // Gson - Critical for TypeConverters AND KAPT
+    implementation("com.google.code.gson:gson:2.10.1")
+    kapt("com.google.code.gson:gson:2.10.1") // ✅ Required for annotation processing
+
+    // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
-    // Lifecycle (ViewModel, LiveData)
+    // Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
 
-    // Jetpack Compose
+    // Compose
     val composeBom = platform("androidx.compose:compose-bom:2023.10.01")
     implementation(composeBom)
     androidTestImplementation(composeBom)
