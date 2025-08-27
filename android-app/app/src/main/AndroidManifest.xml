@@ -3,13 +3,14 @@
     package="com.rhamza.al_madina_pro">
 
     <application
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="AlMadina POS"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.AlMadinaPOS">
-        
+        android:theme="@style/Theme.AlMadinaPOS"
+        android:allowBackup="true"
+        android:label="AlMadina POS"
+        android:supportsRtl="true">
+
+        <!-- MainActivity - The launcher activity -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -20,4 +21,5 @@
         </activity>
 
     </application>
+
 </manifest>
