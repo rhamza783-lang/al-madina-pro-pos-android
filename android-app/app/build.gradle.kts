@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.kapt") // Required for kapt
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -35,7 +35,13 @@ android {
     }
 }
 
-// ✅ CORRECT: dependencies block at root level, AFTER android {}
+// ✅ REQUIRED: Define where to download dependencies
+repositories {
+    google()
+    mavenCentral()
+}
+
+// ✅ Dependencies are now resolved
 dependencies {
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
