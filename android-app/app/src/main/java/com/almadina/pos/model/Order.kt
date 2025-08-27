@@ -7,6 +7,7 @@ import com.almadina.pos.data.local.Converters
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 
+// Order Entity
 @Parcelize
 @Entity(tableName = "orders")
 @TypeConverters(Converters::class)
@@ -33,6 +34,7 @@ data class Order(
     val createdAt: Long = System.currentTimeMillis()
 ) : Parcelable
 
+// Order Item (part of Order)
 @Parcelize
 data class OrderItem(
     val id: String,
@@ -45,6 +47,7 @@ data class OrderItem(
     val notes: String? = null
 ) : Parcelable
 
+// Item Modifier
 @Parcelize
 data class ItemModifier(
     val id: String,
@@ -52,6 +55,7 @@ data class ItemModifier(
     val price: Double
 ) : Parcelable
 
+// Payment
 @Parcelize
 data class Payment(
     val id: String,
@@ -61,6 +65,7 @@ data class Payment(
     val createdAt: Long = System.currentTimeMillis()
 ) : Parcelable
 
+// Enums must be converted to String or Int
 enum class PaymentStatus { PENDING, PARTIAL, PAID, REFUNDED }
 enum class OrderStatus { ACTIVE, COMPLETED, CANCELLED }
 enum class PaymentMethod { CASH, JAZZCASH, EASYPAISA, CARD, CREDIT }
