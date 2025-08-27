@@ -63,13 +63,13 @@ dependencies {
     implementation("androidx.room:room-ktx:2.5.0")
     kapt("androidx.room:room-compiler:2.5.0")
 
+    // Gson (for TypeConverters)
+    implementation("com.google.code.gson:gson:2.10.1")
+    kapt("com.google.code.gson:gson:2.10.1") // Critical for KAPT
+
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-
-    // Gson - Critical for TypeConverters AND KAPT
-    implementation("com.google.code.gson:gson:2.10.1")
-    kapt("com.google.code.gson:gson:2.10.1") // ✅ Required for annotation processing
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
