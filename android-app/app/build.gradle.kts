@@ -2,6 +2,17 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
+    id("com.google.dagger.hilt.android") // ✅ Apply Hilt plugin
+}
+
+// ✅ Required for Hilt with Kotlin
+kapt {
+    correctErrorTypes = true
+}
+
+// ✅ Enable Hilt aggregating task (improves incremental builds)
+hilt {
+    enableAggregatingTask = true
 }
 
 android {
@@ -55,8 +66,8 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     // Hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-compiler:2.44")
+    implementation("com.google.dagger:hilt-android:2.56.2")
+    kapt("com.google.dagger:hilt-compiler:2.56.2")
 
     // Room
     implementation("androidx.room:room-runtime:2.5.0")
@@ -65,7 +76,7 @@ dependencies {
 
     // Gson (for TypeConverters)
     implementation("com.google.code.gson:gson:2.10.1")
-    kapt("com.google.code.gson:gson:2.10.1") // Critical for KAPT
+    kapt("com.google.code.gson:gson:2.10.1")
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
