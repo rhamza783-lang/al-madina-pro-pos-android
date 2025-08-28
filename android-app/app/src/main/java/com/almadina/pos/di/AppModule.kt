@@ -3,15 +3,12 @@ package com.almadina.pos.di
 import android.content.Context
 import androidx.room.Room
 import com.almadina.pos.data.local.AppDatabase
-import com.almadina.pos.data.remote.ApiService
-import com.google.gson.GsonBuilder
+import com.almadina.pos.data.local.OrderDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -25,29 +22,16 @@ object AppModule {
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,
-            AppDatabase.DATABASE_NAME
+            "pos_db"
         ).fallbackToDestructiveMigration().build()
     }
 
     @Provides
     @Singleton
-    fun provideOrderDao(db: AppDatabase) = db.orderDao()
+    fun provideOrderDao(db: AppDatabase): OrderDao = db.orderDao()
 
-    // --- NETWORK ---
-    private const val BASE_URL = "http://10.0.2.2:3000/api/" // Default for emulator
-
-    @Provides
-    @Singleton
-    fun provideRetrofit(): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
-            .build()
-    }
-
-    @Provides
-    @Singleton
-    fun provideApiService(retrofit: Retrofit): ApiService {
-        return retrofit.create(ApiService::class.java)
-    }
+    //
+    // --- NOTE: We have intentionally removed provideRetrofit() and provideApiService() ---
+    // --- to bypass the KSP 'error.NonExistentClass' bug.                       ---
+    //
 }
