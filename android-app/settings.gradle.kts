@@ -12,19 +12,4 @@ pluginManagement {
     }
 }
 
-// ✅ Force Kotlin version
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-    }
-    versionCatalogs {
-        libs {
-            version("kotlin", "1.9.0")
-            library("kotlin-stdlib").to("org.jetbrains.kotlin", "kotlin-stdlib").version("kotlin")
-            library("kotlin-test").to("org.jetbrains.kotlin", "kotlin-test").version("kotlin")
-        }
-    }
-}
-
 include(":app")
