@@ -2,16 +2,20 @@ package com.almadina.pos.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val PrimaryColor = Color(0xFF006A4E)
-val SecondaryColor = Color(0xFF4ECDC4)
-val BackgroundColor = Color(0xFFF0F4F8)
+// Main App Colors for Jetpack Compose
+val PrimaryGreen = Color(0xFF006A4E)
+val DarkGreen = Color(0xFF004D39)
+val AccentTeal = Color(0xFF4ECDC4)
 
-val TextPrimary = Color(0xFF2E3A59)
+// Neutral Colors for Jetpack Compose
+val TextPrimary = Color(0xFF222B45)
 val TextSecondary = Color(0xFF8F9BB3)
+val Background = Color(0xFFF7F9FC)
+val White = Color.White
+val Black = Color.Black
 
-val SuccessColor = Color(0xFF28A745)
-val ErrorColor = Color(0xFFDC3545)
-val WarningColor = Color(0xFFFFC107)
-val InfoColor = Color(0xFF17A2B8)
-
-val BorderColor = Color(0xFFE4E9F2)
+// Functional Colors for Jetpack Compose
+val Success = Color(0xFF28A745)
+val Info = Color(0xFF17A2B8)
+val Warning = Color(0xFFFFC107)
+val Error = Color(0xFFDC3545)
