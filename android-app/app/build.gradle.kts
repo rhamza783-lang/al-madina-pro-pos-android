@@ -3,16 +3,13 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
     id("com.google.dagger.hilt.android")
-    // ✅ Apply Compose Compiler Plugin (required for Kotlin 2.0+)
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
-// ✅ Required for Hilt
 kapt {
     correctErrorTypes = true
 }
 
-// ✅ Enable Hilt aggregating task (improves incremental builds)
 hilt {
     enableAggregatingTask = true
 }
