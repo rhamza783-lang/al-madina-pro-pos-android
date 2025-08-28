@@ -2,15 +2,15 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
-    id("com.google.dagger.hilt.android") // ✅ Apply Hilt plugin
+    id("com.google.dagger.hilt.android")
 }
 
-// ✅ Required for Hilt with Kotlin
+// ✅ Required for Hilt + Kotlin
 kapt {
     correctErrorTypes = true
 }
 
-// ✅ Enable Hilt aggregating task (improves incremental builds)
+// ✅ Enable aggregating task for better incremental builds
 hilt {
     enableAggregatingTask = true
 }
