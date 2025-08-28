@@ -1,14 +1,13 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.kapt")
+    id("com.google.devtools.ksp") // ✅ Replace kapt with KSP
     id("com.google.dagger.hilt.android")
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
-kapt {
-    correctErrorTypes = true
-}
+// Optional: keep if you have Java-only annotations
+// kapt { correctErrorTypes = true }
 
 hilt {
     enableAggregatingTask = true
@@ -66,16 +65,17 @@ dependencies {
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.56.2")
-    kapt("com.google.dagger:hilt-compiler:2.56.2")
+    ksp("com.google.dagger:hilt-compiler:2.56.2") // ✅ KSP instead of kapt
 
     // Room
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1") // ✅ KSP instead of kapt
 
-    // Gson
+    // Gson (for TypeConverters)
     implementation("com.google.code.gson:gson:2.10.1")
-    kapt("com.google.code.gson:gson:2.10.1")
+    // Optional: keep kapt only for Gson if needed
+    // kapt("com.google.code.gson:gson:2.10.1")
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
