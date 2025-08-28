@@ -1,4 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Your App's Primary Color Palette -->
+    <color name="primary_green">#FF006A4E</color> <!-- Your main brand green -->
+    <color name="dark_green">#FF004D39</color>
+    <color name="accent_teal">#FF4ECDC4</color>
+    
+    <!-- Standard Material Colors -->
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
