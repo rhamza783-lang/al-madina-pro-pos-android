@@ -1,4 +1,4 @@
-// ✅ Add this block to force Kotlin 1.9.0
+// ✅ Force Kotlin 1.9.0 to fix metadata version mismatch
 configurations.all {
     resolutionStrategy {
         eachDependency {
@@ -17,10 +17,12 @@ plugins {
     id("com.google.dagger.hilt.android")
 }
 
+// ✅ Required for Hilt + Kotlin
 kapt {
     correctErrorTypes = true
 }
 
+// ✅ Enable Hilt aggregating task
 hilt {
     enableAggregatingTask = true
 }
@@ -84,7 +86,7 @@ dependencies {
     implementation("androidx.room:room-ktx:2.5.0")
     kapt("androidx.room:room-compiler:2.5.0")
 
-    // Gson
+    // Gson (for TypeConverters)
     implementation("com.google.code.gson:gson:2.10.1")
     kapt("com.google.code.gson:gson:2.10.1")
 
