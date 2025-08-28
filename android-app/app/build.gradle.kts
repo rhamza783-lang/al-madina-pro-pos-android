@@ -1,3 +1,15 @@
+// ✅ Add this block to force Kotlin 1.9.0
+configurations.all {
+    resolutionStrategy {
+        eachDependency {
+            if (requested.group == "org.jetbrains.kotlin") {
+                useVersion("1.9.0")
+                because("Kotlin 2.x is incompatible with current AGP and R8")
+            }
+        }
+    }
+}
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
