@@ -3,6 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
     id("com.google.dagger.hilt.android")
+    // ✅ Apply Compose Compiler Plugin
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 kapt {
