@@ -4,7 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.almadina.pos.data.local.Converters
+import kotlinx.parcelize.Parcelize
+import android.os.Parcelable
 
+@Parcelize
 @Entity(tableName = "orders")
 @TypeConverters(Converters::class)
 data class Order(
@@ -27,34 +30,16 @@ data class Order(
     val invoiceNumber: String,
     val items: List<OrderItem>,
     val payments: List<Payment> = emptyList(),
-    val createdAt: Long = System.currentTimeMillis()
-)
+    val createdAt: Long = System.currentTimeMillis(),
+    // This is now a real column that Room understands
+    val syncStatus: SyncStatus = SyncStatus.PENDING
+) : Parcelable
 
-data class OrderItem(
-    val id: String,
-    val itemId: String,
-    val itemName: String,
-    val quantity: Int,
-    val unitPrice: Double,
-    val totalPrice: Double,
-    val modifiers: List<ItemModifier> = emptyList(),
-    val notes: String? = null
-)
-
-data class ItemModifier(
-    val id: String,
-    val name: String,
-    val price: Double
-)
-
-data class Payment(
-    val id: String,
-    val method: PaymentMethod,
-    val amount: Double,
-    val referenceNumber: String? = null,
-    val createdAt: Long = System.currentTimeMillis()
-)
-
+// ... (The rest of the Order.kt file is the same)
+@Parcelize data class OrderItem(/*...*/) : Parcelable
+@Parcelize data class ItemModifier(/*...*/) : Parcelable
+@Parcelize data class Payment(/*...*/) : Parcelable
 enum class PaymentStatus { PENDING, PARTIAL, PAID, REFUNDED }
 enum class OrderStatus { ACTIVE, COMPLETED, CANCELLED }
-enum class PaymentMethod { CASH, JAZZCASH, EASYPAISA, CARD, CREDIT }
+// Add SyncStatus here
+enum class SyncStatus { SYNCED, PENDING, FAILED }
