@@ -1,107 +1,38 @@
 package com.almadina.pos.data.local
 
 import androidx.room.TypeConverter
+import com.almadina.pos.model.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.almadina.pos.model.*
 
 class Converters {
     private val gson = Gson()
 
-    // === ModifierGroup (List<ModifierGroup>) ===
+    // --- ENUM CONVERTERS ---
     @TypeConverter
-    fun fromModifierGroups(modifierGroups: List<ModifierGroup>?): String? {
-        return modifierGroups?.let { gson.toJson(it) }
-    }
+    fun fromSyncStatus(status: SyncStatus?): String? = status?.name
+    @TypeConverter
+    fun toSyncStatus(value: String?): SyncStatus? = value?.let { SyncStatus.valueOf(it) }
 
     @TypeConverter
-    fun toModifierGroups(json: String?): List<ModifierGroup>? {
-        return json?.let {
-            val type = object : TypeToken<List<ModifierGroup>>() {}.type
-            gson.fromJson(it, type)
-        }
-    }
-
-    // === OrderItem (List<OrderItem>) ===
+    fun fromPaymentStatus(status: PaymentStatus?): String? = status?.name
     @TypeConverter
-    fun fromOrderItems(items: List<OrderItem>?): String? {
-        return items?.let { gson.toJson(it) }
-    }
+    fun toPaymentStatus(value: String?): PaymentStatus? = value?.let { PaymentStatus.valueOf(it) }
 
+    // --- LIST CONVERTERS ---
     @TypeConverter
-    fun toOrderItems(json: String?): List<OrderItem>? {
-        return json?.let {
-            val type = object : TypeToken<List<OrderItem>>() {}.type
-            gson.fromJson(it, type)
-        }
-    }
-
-    // === Payment (List<Payment>) ===
+    fun fromOrderItemList(value: List<OrderItem>?): String = gson.toJson(value)
     @TypeConverter
-    fun fromPayments(payments: List<Payment>?): String? {
-        return payments?.let { gson.toJson(it) }
+    fun toOrderItemList(value: String): List<OrderItem>? {
+        return gson.fromJson(value, object : TypeToken<List<OrderItem>?>() {}.type)
     }
-
+    
     @TypeConverter
-    fun toPayments(json: String?): List<Payment>? {
-        return json?.let {
-            val type = object : TypeToken<List<Payment>>() {}.type
-            gson.fromJson(it, type)
-        }
-    }
-
-    // === PaymentStatus (enum) ===
+    fun fromPaymentList(value: List<Payment>?): String = gson.toJson(value)
     @TypeConverter
-    fun fromPaymentStatus(status: PaymentStatus?): String? {
-        return status?.name
+    fun toPaymentList(value: String): List<Payment>? {
+        return gson.fromJson(value, object : TypeToken<List<Payment>?>() {}.type)
     }
-
-    @TypeConverter
-    fun toPaymentStatus(name: String?): PaymentStatus? {
-        return name?.let { PaymentStatus.valueOf(it) }
-    }
-
-    // === OrderStatus (enum) ===
-    @TypeConverter
-    fun fromOrderStatus(status: OrderStatus?): String? {
-        return status?.name
-    }
-
-    @TypeConverter
-    fun toOrderStatus(name: String?): OrderStatus? {
-        return name?.let { OrderStatus.valueOf(it) }
-    }
-
-    // === PaymentMethod (enum) ===
-    @TypeConverter
-    fun fromPaymentMethod(method: PaymentMethod?): String? {
-        return method?.name
-    }
-
-    @TypeConverter
-    fun toPaymentMethod(name: String?): PaymentMethod? {
-        return name?.let { PaymentMethod.valueOf(it) }
-    }
-
-    // === TableStatus (enum) ===
-    @TypeConverter
-    fun fromTableStatus(status: TableStatus?): String? {
-        return status?.name
-    }
-
-    @TypeConverter
-    fun toTableStatus(name: String?): TableStatus? {
-        return name?.let { TableStatus.valueOf(it) }
-    }
-
-    // === UserRole (enum) ===
-    @TypeConverter
-    fun fromUserRole(role: UserRole?): String? {
-        return role?.name
-    }
-
-    @TypeConverter
-    fun toUserRole(name: String?): UserRole? {
-        return name?.let { UserRole.valueOf(it) }
-    }
+    
+    // ... (other list converters can go here if needed)
 }
