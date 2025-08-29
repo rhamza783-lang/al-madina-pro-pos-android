@@ -1,26 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- 
-      Base application theme that inherits from the modern Material3 theme.
-      The parent theme provides all the 'attr/' values that were previously missing.
+<resources>
+    <!--
+      Base application theme. This is a very simple theme to prevent resource conflicts.
+      The parent 'NoActionBar' is important.
     -->
-    <style name="Theme.AlMadinaPOS" parent="Theme.Material3.DayNight.NoActionBar">
-    
-        <!-- Primary brand color -->
-        <item name="colorPrimary">@color/primary_green</item>
-        <item name="colorPrimaryContainer">@color/dark_green</item>
-        <item name="colorOnPrimary">@color/white</item>
+    <style name="Theme.AlMadinaPOS" parent="android:Theme.Material.Light" />
 
-        <!-- Secondary brand color -->
-        <item name="colorSecondary">@color/accent_teal</item>
-        <item name="colorOnSecondary">@color/black</item>
-        
-        <!-- Other theme colors -->
-        <item name="android:colorBackground">@color/white</item>
-        <item name="colorSurface">@color/white</item>
-        <item name="colorOnSurface">@color/black</item>
-
-        <!-- Status bar color -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryContainer</item>
+    <!--
+      The specific theme applied to the Activity in the Manifest.
+      This removes the top title bar from the old Android View system.
+    -->
+    <style name="Theme.AlMadinaPOS.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 </resources>
