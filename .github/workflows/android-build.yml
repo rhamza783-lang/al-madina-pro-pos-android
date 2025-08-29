@@ -1,4 +1,4 @@
-name: Build Al--Madina POS Android App
+name: Build Al-Madina POS Android App
 
 on:
   push:
@@ -21,10 +21,10 @@ jobs:
       - name: Grant execute permission to gradlew
         run: chmod +x android-app/gradlew
 
-      # --- THE FINAL FIX IS HERE ---
+      # --- THIS IS THE FINAL, CORRECT COMMAND ---
       - name: Build with Gradle
-        # The command no longer includes the 'clean' task
-        run: cd android-app && ./gradlew assembleDebug
+        # This command tells gradle to run the 'assembleDebug' task ON THE ':app' module.
+        run: cd android-app && ./gradlew :app:assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
