@@ -1,4 +1,4 @@
-name: Build Al-Madina POS Android App
+name: Build Al--Madina POS Android App
 
 on:
   push:
@@ -17,13 +17,14 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: gradle
 
       - name: Grant execute permission to gradlew
         run: chmod +x android-app/gradlew
 
-      - name: Build Debug APK with Clean
-        run: cd android-app && ./gradlew clean assembleDebug
+      # --- THE FINAL FIX IS HERE ---
+      - name: Build with Gradle
+        # The command no longer includes the 'clean' task
+        run: cd android-app && ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
