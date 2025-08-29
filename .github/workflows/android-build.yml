@@ -23,8 +23,10 @@ jobs:
 
       # --- THIS IS THE FINAL, CORRECT COMMAND ---
       - name: Build with Gradle
-        # This command tells gradle to run the 'assembleDebug' task ON THE ':app' module.
-        run: cd android-app && ./gradlew :app:assembleDebug
+        # This command is run from the repository root.
+        # It explicitly tells Gradle where the project is ('-p android-app')
+        # and the full path to the task to run (':app:assembleDebug').
+        run: ./android-app/gradlew -p android-app :app:assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
