@@ -19,14 +19,14 @@ jobs:
           distribution: 'temurin'
 
       - name: Grant execute permission to gradlew
-        run: chmod +x android-app/gradlew
+        run: chmod +x ./android-app/gradlew
 
-      # --- THIS IS THE FINAL, CORRECT COMMAND ---
+      # --- THIS IS THE CORRECT AND FINAL COMMAND ---
       - name: Build with Gradle
-        # This command is run from the repository root.
-        # It explicitly tells Gradle where the project is ('-p android-app')
-        # and the full path to the task to run (':app:assembleDebug').
-        run: ./android-app/gradlew -p android-app :app:assembleDebug
+        # It runs the wrapper script located at ./android-app/gradlew
+        # It explicitly tells Gradle where the settings.gradle.kts is located (--project-dir)
+        # It then specifies the exact task to run (:app:assembleDebug)
+        run: ./android-app/gradlew --project-dir ./android-app :app:assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
